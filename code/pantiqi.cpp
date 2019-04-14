@@ -1280,15 +1280,17 @@ void PanTiQi::panjue(Result &result, const bool &isChangeGloble){
 	std::cout << endl;
 	int last_waiting_state=0;
 	int last_arrived_state=0;
+	int last_in_road = 0;
 	while (true/* 按时间片处理 */) {
 		//int flag = 0;
 		std::cout << "-----new again:" << G_TIME_INDEX
-		<<"\tWaiting:"<< g_no_road_waiting_state <<"  S1:"<< last_waiting_state-g_no_road_waiting_state
-		<<"\tInRoad:"<< g_in_road_end_state+g_in_road_outroad_state+g_in_road_waiting_state+g_in_road_start_state
-		<< "\tArrived:"<<g_no_road_arrived_state<<"  S2:"<< g_no_road_arrived_state-last_arrived_state<< endl;
+		<<"\t\tWaiting:"<< g_no_road_waiting_state <<"\tS1:"<< last_waiting_state-g_no_road_waiting_state
+		<<"\t\tInRoad:"<< g_in_road_end_state+g_in_road_outroad_state+g_in_road_waiting_state+g_in_road_start_state<<"\tS2:"<< g_in_road_end_state+g_in_road_outroad_state+g_in_road_waiting_state+g_in_road_start_state-last_in_road
+		<< "\t\tArrived:"<<g_no_road_arrived_state<<"\tS3:"<< g_no_road_arrived_state-last_arrived_state<< endl;
 		LOCK_FLAG =0;
 		last_waiting_state = g_no_road_waiting_state;
 		last_arrived_state = g_no_road_arrived_state;
+		last_in_road = g_in_road_end_state+g_in_road_outroad_state+g_in_road_waiting_state+g_in_road_start_state;
 		initState();//一轮的起点，为了判别而已
 		driveJustCurrentRoad();
 		//showAllCarCurrentState(timeIndex);
