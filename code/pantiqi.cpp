@@ -5,7 +5,7 @@
 CarDatas g_p_carDatas;
 RoadDatas g_p_roadDatas;
 CrossDatas g_p_crossDatas;
-//车辆状态计数器
+//车辆状态计数器，注意别以为没写num就不是num，大写的才是状态，小写是对应的计数器
 int g_no_road_waiting_state = 0;//没上路等待
 int g_in_road_end_state = 0;//当前时间片终止
 int g_in_road_waiting_state = 0;//当前时间片等待
@@ -1278,13 +1278,17 @@ void PanTiQi::panjue(Result &result, const bool &isChangeGloble){
 		sort(g_p_crossDatas[i].orderConnectRoads.begin(), g_p_crossDatas[i].orderConnectRoads.end());//道路排序,id升序
 	}
 	std::cout << endl;
+	int last_waiting_state=0;
+	int last_arrived_state=0;
 	while (true/* 按时间片处理 */) {
 		//int flag = 0;
 		std::cout << "-----new again:" << G_TIME_INDEX
-		<<"\tWaiting:"<< g_no_road_waiting_state 
+		<<"\tWaiting:"<< g_no_road_waiting_state <<"\tS1:"<< g_no_road_waiting_state-last_waiting_state
 		<<"\tInRoad:"<< g_in_road_end_state+g_in_road_outroad_state+g_in_road_waiting_state+g_in_road_start_state
-		<< "\tArrived:"<<g_no_road_arrived_state<< endl;
+		<< "\tArrived:"<<g_no_road_arrived_state<<"\tS2:"<< g_no_road_arrived_state-last_arrived_state<< endl;
 		LOCK_FLAG =0;
+		last_waiting_state = g_no_road_waiting_state;
+		last_arrived_state = g_no_road_arrived_state;
 		initState();//一轮的起点，为了判别而已
 		driveJustCurrentRoad();
 		//showAllCarCurrentState(timeIndex);
