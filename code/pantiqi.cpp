@@ -912,7 +912,7 @@ bool driveCarInWaitState(const int &timeIndex,Result &result){
 			for (int roadInCrossIndex = 0; roadInCrossIndex < g_p_crossDatas[crossIndex].orderConnectRoads.size(); roadInCrossIndex++/*foreach(roads)*/){
 				int roadId = g_p_crossDatas[crossIndex].orderConnectRoads[roadInCrossIndex];
 				//道路的各个车道getCarFromRoad(road, dir);
-				int dir = (g_p_crossDatas[crossIndex].id == g_p_roadDatas.findById(roadId).getfrom()) ? 1 : 0;//过路口方向
+				int dir = (g_p_crossDatas[crossIndex].id == g_p_roadDatas.findById(roadId).getfrom()) ? 1 : 0;//过路口方向，注意1和0
 				while(!g_p_roadDatas.findById(roadId).carSequeue[dir].empty()){
 					Car car= g_p_carDatas.findById(g_p_roadDatas.findById(roadId).carSequeue[dir].front());
 					int channel = car.currentInf.currentChannel;
@@ -922,7 +922,7 @@ bool driveCarInWaitState(const int &timeIndex,Result &result){
 					if (moveToNextRoad(car)){
 						flag = 1;
 						driveJustCurrentRoad(g_p_roadDatas.findById(roadId),channel,dir);
-						g_p_roadDatas.findById(roadId).createSequeue(dir);
+						g_p_roadDatas.findById(roadId).createSequeue(dir);//这里是当初判题器文档出现问题的地方，如果是picture1的话是这样，如果是picuture2的话是driveCarInitList(timeIndex,true);
 						driveCarInitList(g_p_roadDatas.findById(roadId),dir,timeIndex,true);
 					}else{
 						break;
