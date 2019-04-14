@@ -1,3 +1,5 @@
+//2019-4-14
+//Author F.J.S.
 #ifndef DATA_H
 #define DATA_H
 
@@ -27,20 +29,20 @@ static const int  INF = 0x8FFFFF;
 
 //test
 ///判决器
-const int NO_ROAD_WAITING_STATE = 1;
-const int IN_ROAD_START_STATE = 2;
-const int IN_ROAD_WAITING_STATE = 4;
-const int IN_ROAD_OUTROAD_STATE = 8;
-const int IN_ROAD_END_STATE = 16;
-const int NO_ROAD_ARRIVED_STATE = 4096;
+const int NO_ROAD_WAITING_STATE = 1;//没上路等待
+const int IN_ROAD_START_STATE = 2;//时间片的起始状态
+const int IN_ROAD_WAITING_STATE = 4;//当前时间片等待
+const int IN_ROAD_OUTROAD_STATE = 8;//在路上等待转弯
+const int IN_ROAD_END_STATE = 16;//当前时间片终止
+const int NO_ROAD_ARRIVED_STATE = 4096;//到达终点
 
-const int GO_STRAIGHT = 4;
-const int TURN_LEFT = 2;
-const int TURN_RIGHT = 1;
+const int GO_STRAIGHT = 4;//直行
+const int TURN_LEFT = 2;//左转
+const int TURN_RIGHT = 1;;//右转
 struct Result
 {
 	bool isFail=true;
-	int lastTime=800;
+	int lastTime=0;
 	union 
 	{
 		struct{
@@ -54,8 +56,6 @@ struct Result
 	
 };
 unsigned int myrandom();
-
-
 class Cross
 {
 public:
@@ -86,7 +86,6 @@ public:
 		}
 		getchar();
 	};
-
 	CrossDatas(){};
 	void open(string &crossPath);
 	~CrossDatas(){};
@@ -97,7 +96,6 @@ public:
 		//cout << "CrossDatas findById Error" << endl;
 	};
 	vector<Cross> m_cross;
-
 	unordered_map<int, int> m_trueidToIndex;//trueid到Index的map
 };
 extern CrossDatas g_crossDatas;
@@ -158,9 +156,9 @@ public:
 	int speed;
 	int channel;
 	int isDuplex;
-	int capacity=0;
 	int truefrom;
 	int trueto;
+	int capacity=0;
 	int maxNum;
 	int getfrom(){//将.txt给的Road的from转为
 		return g_crossDatas.getIndex(this->truefrom);

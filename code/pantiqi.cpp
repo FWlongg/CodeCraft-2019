@@ -1,3 +1,5 @@
+//2019-4-14
+//Author F.J.S.
 #include "pantiqi.h"
 //判题器使用的全局变量
 CarDatas g_p_carDatas;
@@ -957,7 +959,7 @@ bool isFinish(){
 	}
 	return false;
 }
-//发车
+//发车，这个可能是最烂的地方了，因为我把未上路的车直接放对应的起始路上，但又分开类两个名称carPriorityGarage及carGeneralGarage，结果一模一样的代码写了两遍
 void Road::runCarInInitList(const int &direction,const int & time,const bool &priority){
 	int crossId;
 	int carTempId;
