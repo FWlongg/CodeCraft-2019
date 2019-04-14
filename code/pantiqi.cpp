@@ -3,13 +3,13 @@
 CarDatas g_p_carDatas;
 RoadDatas g_p_roadDatas;
 CrossDatas g_p_crossDatas;
-
-int g_no_road_waiting_state = 0;
-int g_in_road_end_state = 0;
-int g_in_road_waiting_state = 0;
-int g_no_road_arrived_state = 0;
-int g_in_road_start_state = 0;
-int g_in_road_outroad_state = 0;
+//车辆状态计数器
+int g_no_road_waiting_state = 0;//没上路等待
+int g_in_road_end_state = 0;//当前时间片终止
+int g_in_road_waiting_state = 0;//当前时间片等待
+int g_no_road_arrived_state = 0;//到达终点
+int g_in_road_start_state = 0;//时间片的起始状态
+int g_in_road_outroad_state = 0;//在路上等待转弯
 
 //判决器
 int LOCK_FLAG  =  0;//死锁标志
