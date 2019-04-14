@@ -1,7 +1,7 @@
 //2019-4-14
 //Author F.J.S.
 #include "pantiqi.h"
-//判题器使用的全局变量
+//判题器使用的全局变量，为什么不用m_carDatas，m_roadDatas，m_crossDatas，懒啊，每次在修改函数和定义之间徘徊的我决定还是简单点吧
 CarDatas g_p_carDatas;
 RoadDatas g_p_roadDatas;
 CrossDatas g_p_crossDatas;

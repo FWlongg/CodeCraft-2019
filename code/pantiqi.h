@@ -1,3 +1,5 @@
+//2019-4-14
+//Author F.J.S.
 #include"Datas.h"
 
 class PanTiQi{
